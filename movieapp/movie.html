@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"
+    />
+  </head>
+
+  <body>
+    <form id="movieForm">
+      <label for="movieName">Enter name of movie</label>
+      <input id="movieName" , />
+
+      <label for="movieRating">Enter movie rating</label>
+      <input id="movieRating" />
+
+      <label for="movieSubmit">Submit Movie</label>
+      <input id="movieSubmit" type="submit" />
+    </form>
+
+    <ul id="movieList"></ul>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script>
+      $(document).ready(() => {
+        $("#movieForm").on("submit", function (e) {
+            e.preventDefault();
+
+            const title = $('#movieName').val();
+            if (title.length < 2) return;
+
+            const rating = $('#movieRating').val();
+            if (isNaN(rating) || Number.parseInt(rating) < 1 || Number.parseInt(rating) > 10) {
+                return;
+            }
+            
+
+
+            let newLI = $(`<li>Title: ${title}; Rating: ${rating}</li>`).appendTo('#movieList');
+            $('<input type="button" class="btn-close" aria-label="Close"/>').on("click", function() {
+                $(this).parent().remove();
+            }).appendTo(newLI);                
+        });
+      });
+    </script>
+  </body>
+</html>
